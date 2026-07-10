@@ -1,0 +1,19 @@
+# Heartwood dev compose override
+# -------------------------------
+# Swaps the prebuilt mempool/* images referenced by docker/docker-compose.yml
+# for the locally built heartwood-*:dev images produced by build-images.sh.
+#
+# Usage (run from repo root):
+#   heartwood/dev/build-images.sh
+#   docker compose -f docker/docker-compose.yml -f heartwood/dev/docker-compose.override.yml up
+#
+# The project directory (and thus relative volume paths like ./data and
+# ./mysql/data) resolves against the FIRST -f file's directory (docker/),
+# exactly as the base compose file expects.
+version: "3.7"
+
+services:
+  web:
+    image: heartwood-frontend:dev
+  api:
+    image: heartwood-backend:dev
