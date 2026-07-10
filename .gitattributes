@@ -4,3 +4,6 @@ package.json eol=crlf -crlf
 
 # Force LF for shell scripts so Docker builds don't fail on CRLF
 *.sh text eol=lf
+# Extensionless shell scripts baked into Docker images (missed by *.sh);
+# CRLF in these breaks the container at runtime (shebang reads as 'sh\r')
+wait-for text eol=lf
